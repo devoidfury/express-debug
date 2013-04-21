@@ -4,7 +4,10 @@
   "description": "debug toolbar middleware for developing applications in expressjs",
   "main": "index.js",
   "scripts": {},
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/devoidfury/express-debug.git"
+  },
   "author": "Tom Hunkapiller",
   "license": "MIT",
   "dependencies": {
