@@ -1,0 +1,246 @@
+style(type='text/css')
+    /* SHOW/HIDE buttons */
+    #EDT-show {
+        position: fixed;
+        top: 200px;
+        right: 0;
+        z-index: 1000;
+
+        background-color: rgba(255, 255, 255, 0.55);
+        border: 2px solid rgba(0, 0, 0, 0.4);
+        padding: 10px;
+
+        font-size: 20px;
+        font-weight: bold;
+
+        cursor: pointer;
+        color: #444;
+    }
+    #EDT-show:hover { color: #af2b2b; }
+
+    #EDT #EDT-close {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 30px;
+        display: block;
+        height: 34px;
+        width: 34px;
+        text-align: center;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #666;
+        border: 2px solid #666;
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -ms-border-radius: 20px;
+    }
+
+    /* main layout */
+    #EDT {
+        display: none;
+
+        z-index: 1000;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+
+        font-size: 14px;
+    }
+
+    #EDT-layout { width: 100%; min-height: 100%; table-layout:fixed; }
+    #EDT #EDT-main { background-color: rgba(255, 255, 255, 0.95); padding: 20px; }
+
+    #EDT #EDT-sb {
+        width: 260px;
+        background-color: rgba(33, 33, 33, 0.95);
+        color: #CCC;
+        font-size: 16px;
+        border: 2px solid rgba(0, 0, 0, 0.95);
+    }
+
+    /* Sidebar elements */
+    #EDT-sb ul { margin-top: 10px;}
+    #EDT-sb li { list-style: none; border-top: 2px solid rgba(0, 0, 0, 0.95); }
+    #EDT-sb li:last-child { border-bottom: 2px solid rgba(0, 0, 0, 0.95); }
+    #EDT-sb a { text-decoration: none; display: block; width: 100%; padding: 10px; }
+    #EDT-sb a:hover { color: #c32d2d; text-decoration: underline; background-color: rgba(0, 0, 0, 0.95); }
+
+    /* core styling */
+    #EDT * {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        color: inherit;
+        background: none repeat transparent;
+        font-family: Consolas, Monaco, monospace, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    #EDT, #EDT * { box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+
+    #EDT .tab { display: none; }
+    #EDT .tab.active { display: block; }
+
+    #EDT h2 { font-size: 22px; font-weight: bold; color: #CCC; margin-bottom: 14px; }
+    #EDT h4 {
+        display: inline-block;
+        padding-left: 20px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #000;
+        margin-bottom: 12px;
+    }
+    #EDT h4 span { padding-left: 20px; font-weight: normal; font-size: 14px; }
+
+    #EDT table.object {
+        border: 1px solid #DDD;
+        table-layout:fixed;
+        width: 100%;
+        border-collapse:collapse;
+        margin-bottom: 12px;
+    }
+    #EDT .object th { font-weight: bold; }
+    #EDT .object tr:nth-child(2n) { background-color: rgba(0, 0, 0, 0.03); }
+    #EDT .object th, #EDT .object td { padding: 8px; word-wrap: break-word; color: #000; }
+    #EDT .object td:first-child, #EDT .object th:first-child { width: 126px; }
+
+    /* value output styling */
+    #EDT .string { color: #179900 }
+    #EDT .string:before, #EDT .string:after { content: '"'; color: #000; }
+    #EDT .number { color: #af2b2b; font-weight: bold; }
+    #EDT .boolean { color: #00F; }
+    #EDT .undefined { font-style: italic; }
+    #EDT .undefined, #EDT .null { color: #a500a0; }
+    #EDT .date { color: #179900; }
+    #EDT .date:before { content: 'Date("'; color: #000; }
+    #EDT .date:after { content: '")'; color: #000; }
+    #EDT .exceeded { color: #666; font-style: italic; }
+    /* template code and functions */
+    #EDT pre { background-color: #F5F5F5; color: #444; border: 1px solid #DDD; padding: 8px; }
+
+mixin print_val(val, depth)
+    - if (val === undefined)
+        span.undefined undefined
+    - if (val === null)
+        span.null null
+    - else if (val instanceof Date)
+        span.date #{val.toString()}
+    - else if (typeof val === 'object')
+        - if (Object.keys(val).length === 0)
+            - if (val instanceof Array)
+                span.array [ ]
+            - else
+                span.object { }
+        - else
+            mixin print_obj(val, depth + 1)
+    - else if (typeof val === 'function')
+        pre !{val}
+    - else
+        - _type = typeof val;
+        span(class="#{_type}") #{val}
+
+mixin print_obj(obj, depth)
+    - depth = depth || 0;
+    - if (depth < settings.depth)
+        table.object
+            thead: tr
+                th
+                    - if (obj instanceof Array)
+                        | index
+                    - else
+                        | name
+                th value
+            - Object.keys(obj).forEach(function(prop){
+                - val = obj[prop]
+                tr
+                    td !{prop}
+                    td: mixin print_val(val, depth)
+            - })
+    - else
+        span.exceeded (Depth exceeded; settings.depth: #{settings.depth})
+
+mixin display
+    .tab#EDT-locals.active
+        h4 res.locals
+        mixin print_obj(res_locals)
+
+        h4 app.locals
+        mixin print_obj(app_locals)
+
+    .tab#EDT-request
+        h4 req
+        mixin print_obj(req_safe)
+
+    - session = req.session || {};
+    .tab#EDT-session
+        h4 session
+        mixin print_obj(session)
+
+    .tab#EDT-template
+        h4 Template
+            span !{template_name}
+        pre #{template}
+
+a#EDT-show EDT
+
+#EDT
+    a#EDT-close X
+    table#EDT-layout
+        tr
+            td#EDT-main
+                mixin display
+            td#EDT-sb
+                h2 express-debug
+                p #{req.method} #{req.path}
+                ul
+                    li.bb: a(href='#EDT-locals',class='bb') Locals
+                    li.bb: a(href='#EDT-session',class='bb') Session
+                    li.bb: a(href='#EDT-template',class='bb') Template
+                    li.bb: a(href='#EDT-request',class='bb') Request
+
+script
+    (function() {
+        var $EDT = document.getElementById('EDT'),
+            $sidebar = document.getElementById('EDT-sb'),
+            $close = document.getElementById('EDT-close'),
+            $show = document.getElementById('EDT-show');
+
+        var getHref = function(e) {
+            var el = e.originalTarget || e.srcElement;
+
+            if (!el) return;
+
+            return el.attributes && (el.attributes.hash || el.attributes.href);
+        }
+
+        $sidebar.addEventListener('click', function(e) {
+
+            console.log(e);
+            var tab_id = getHref(e);
+            if (tab_id) {
+                e.preventDefault();
+                var $actives = document.querySelectorAll('#EDT .tab.active');
+                for (var i = 0; i < $actives.length; i++) {
+                    $actives[i].className = 'tab';
+                }
+
+                tab_id = tab_id.nodeValue.substring(1);
+                document.getElementById(tab_id).className = 'tab active';
+            }
+        });
+
+        $close.addEventListener('click', function() {
+            $EDT.style.display = 'none';
+            $show.style.display = 'block';
+        });
+
+        $show.addEventListener('click', function() {
+            $EDT.style.display = 'block';
+            $show.style.display = 'none';
+        });
+    })();

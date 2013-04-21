@@ -1,0 +1,17 @@
+{
+  "name": "express-debug",
+  "version": "0.1.0",
+  "description": "debug toolbar middleware for developing applications in expressjs",
+  "main": "index.js",
+  "scripts": {},
+  "repository": "",
+  "author": "Tom Hunkapiller",
+  "license": "MIT",
+  "dependencies": {
+    "jade": "0.29.0"
+  },
+
+  "peerDependencies": {
+    "express": "3.x"
+  }
+}
