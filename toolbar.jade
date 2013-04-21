@@ -198,10 +198,10 @@ a#EDT-show EDT
                 h2 express-debug
                 p #{req.method} #{req.path}
                 ul
-                    li.bb: a(href='#EDT-locals',class='bb') Locals
-                    li.bb: a(href='#EDT-session',class='bb') Session
-                    li.bb: a(href='#EDT-template',class='bb') Template
-                    li.bb: a(href='#EDT-request',class='bb') Request
+                    li: a(href='#EDT-locals') Locals
+                    li: a(href='#EDT-session') Session
+                    li: a(href='#EDT-template') Template
+                    li: a(href='#EDT-request') Request
 
 script
     (function() {
