@@ -1,4 +1,4 @@
-#express-debug
+# express-debug
 express-debug is a development tool for expressjs. It's simple middleware that
 injects useful debugging output into your html, in a non-obstructive way.
 
@@ -10,18 +10,20 @@ express-debug should *NOT* be used in production environments.
 
 Compatible with express 3.x
 
-###Settings
+
+### Settings
 
 __depth:__ How deep to recurse through printed objects. (Default: 4)
 
 __environments:__ What environments to activate in; just an extra security precaution. (Default: \['development'\])
 
-###Usage
 
-####Install
+### Usage
+
+#### Install
 `npm install express-debug --save-dev`
 
-####Use
+#### Use
 ```js
 var express = require('express');
 var app = express();
@@ -36,11 +38,23 @@ app.configure('development', function() {
 /* ... application logic ... */
 ```
 
-###Issues
+
+### Issues
 Pull requests, feature requests, bug reports, and style breakage reports welcome!
 
 
-###License - MIT
+### Changelog
+**0.1.1**
+    * remove environment checks
+    * fix "view engine" directive, make template reading safer
+
+
+### Goals for 0.2.0
+* Cleaner/modular project structure
+* Pluggable panels
+
+
+### License - MIT
 Copyright (c) 2013 Tom Hunkapiller and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

@@ -205,6 +205,7 @@ a#EDT-show EDT
 
 script
     (function() {
+        "use strict";
         var $EDT = document.getElementById('EDT'),
             $sidebar = document.getElementById('EDT-sb'),
             $close = document.getElementById('EDT-close'),
@@ -213,14 +214,11 @@ script
         var getHref = function(e) {
             var el = e.originalTarget || e.srcElement;
 
-            if (!el) return;
-
-            return el.attributes && (el.attributes.hash || el.attributes.href);
+            return el && el.attributes && (el.attributes.hash || el.attributes.href);
         }
 
         $sidebar.addEventListener('click', function(e) {
 
-            console.log(e);
             var tab_id = getHref(e);
             if (tab_id) {
                 e.preventDefault();
@@ -234,12 +232,14 @@ script
             }
         });
 
-        $close.addEventListener('click', function() {
+        $close.addEventListener('click', function(e) {
+            e.preventDefault();
             $EDT.style.display = 'none';
             $show.style.display = 'block';
         });
 
-        $show.addEventListener('click', function() {
+        $show.addEventListener('click', function(e) {
+            e.preventDefault();
             $EDT.style.display = 'block';
             $show.style.display = 'none';
         });

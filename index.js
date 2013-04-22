@@ -1,4 +1,5 @@
 module.exports = function(settings) {
+    'use strict';
     var jade = require('jade'),
         path = require('path'),
         fs = require('fs'),
@@ -6,14 +7,31 @@ module.exports = function(settings) {
 
     settings = settings || {};
     settings.depth = settings.depth || 4;
-    settings.environments = settings.environments || ['development'];
+
+
+    var isAbsolute = function(path){
+        return ('/' === path[0]) || (':' === path[1] && '\\' === path[2]);
+    };
+    var getPath = function(view, root, default_engine) {
+        if (!isAbsolute(view)) {
+            view = path.join(root, view);
+        }
+
+        var ext = path.extname(view);
+        if (!ext) {
+            view += (default_engine[0] !== '.' ? '.' : '') + default_engine;
+        }
+        return view;
+    };
 
     var debug_render = function(view, options, fn){
         options = options || {};
 
         var self = this,
             req = this.req,
-            app = req.app;
+            app = req.app,
+
+            accept = req.headers.accept || '';
 
         // support callback function as second arg
         if (typeof options === 'function') {
@@ -24,9 +42,8 @@ module.exports = function(settings) {
         // merge res.locals
         options._locals = self.locals;
 
-        var render_toolbar = function(str, location, callback) {
+        var render_toolbar = function(str, loc, callback) {
 
-            var view_dir = app.locals.settings.views;
 
             // req contains a lot of circular references and functions
             // we don't need to see, so only grab relevant info for display
@@ -46,47 +63,74 @@ module.exports = function(settings) {
                 method: req.method,
                 statusCode: req.statusCode
             };
+
+            var view_template_path = getPath(
+                view,
+                app.locals.settings.views,
+                app.locals.settings['view engine'] || ''
+            );
+
+            var view_template;
+
+            try {
+                view_template = fs.readFileSync(view_template_path, 'utf-8');
+            } catch (e) {
+                console.error('EDT: error loading ' + view + ' template: ', e);
+                view_template = 'Could not load template.';
+            }
+
             var opts = {
                 res_locals: options,
                 app_locals: app.locals,
                 template_name: view,
-                template: fs.readFileSync(path.join(view_dir, view), 'utf8'),
+                template: view_template,
                 req: req,
                 req_safe: req_safe,
                 settings: settings
             };
 
             jade.renderFile(template, opts, function(err, toolbar) {
-                if (err)
-                    return callback(err);
-
-                if (location === undefined)
-                    return callback(err, str + toolbar);
-
-                callback(err, str.substring(0, location - 1) + toolbar + str.substring(location));
+                if (err){
+                    callback(err);
+                } else {
+                    str = (loc === undefined) ? str + toolbar :
+                        str.substring(0, loc - 1) + toolbar + str.substring(loc);
+                    callback(err, str);
+                }
             });
         };
 
         var toolbar_callback = function(err, str){
-            if (err) return req.next(err);
+            if (err) {
+                req.next(err);
 
             // only continue if this looks like html
-            if (req.headers['accept'].indexOf('html') === -1)
-                return self.send(str);
+            } else if (accept.indexOf('html') !== -1) {
 
-            var body_location = str.lastIndexOf('</body'),
-                html_location = str.lastIndexOf('</html'),
-                location;
+                var body_location = str.lastIndexOf('</body'),
+                    html_location = str.lastIndexOf('</html'),
+                    location;
 
-            if (body_location !== -1) location = body_location;
-            else if (html_location !== -1) location = html_location;
+                if (body_location !== -1) {
+                    location = body_location;
+                } else if (html_location !== -1) {
+                    location = html_location;
+                }
 
-            render_toolbar(str, location, function(err, str) {
-                // keep existing callback if one was passed
-                if (typeof fn === 'function') return fn(err, str);
-                if (err) return req.next(err);
+                render_toolbar(str, location, function(err, str) {
+                    // keep existing callback if one was passed
+                    if (typeof fn === 'function') {
+                        fn(err, str);
+                    } else if (err) {
+                        req.next(err);
+                    } else {
+                        self.send(str);
+                    }
+                });
+
+            } else {
                 self.send(str);
-            });
+            }
         };
 
         // inject toolbar callback into render callback
@@ -95,10 +139,8 @@ module.exports = function(settings) {
 
     // actual middleware function
     return function(req, res, next) {
-        if (settings.environments.indexOf(res.app.locals.settings.env) !== -1) {
-            res._EDT_original_render = res.render;
-            res.render = debug_render;
-        }
+        res._EDT_original_render = res.render;
+        res.render = debug_render;
         next();
-    }
+    };
 };
