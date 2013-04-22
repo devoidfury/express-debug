@@ -43,8 +43,9 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 ### Changelog
 **0.1.1**
-    * remove environment checks
-    * fix "view engine" directive, make template reading safer
+
+* remove environment checks
+* fix "view engine" directive, make template reading safer
 
 
 ### Goals for 0.2.0
