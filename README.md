@@ -15,8 +15,6 @@ Compatible with express 3.x
 
 __depth:__ How deep to recurse through printed objects. (Default: 4)
 
-__environments:__ What environments to activate in; just an extra security precaution. (Default: \['development'\])
-
 
 ### Usage
 
