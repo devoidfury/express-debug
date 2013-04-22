@@ -12,31 +12,29 @@ Compatible with express 3.x
 
 ###Settings
 
-#####depth
-How deep to recurse through printed objects. (Default: 4)
+__depth:__ How deep to recurse through printed objects. (Default: 4)
 
-#####environments
-What environments to activate in; just an extra security precaution. (Default: \['development'\])
+__environments:__ What environments to activate in; just an extra security precaution. (Default: \['development'\])
 
 ###Usage
 
 ####Install
-
-    npm install express-debug --save-dev
+`npm install express-debug --save-dev`
 
 ####Use
+```js
+var express = require('express');
+var app = express();
 
-    var express = require('express');
-    var app = express();
+/* you are using different environments, right? =) */
+app.configure('development', function() {
+    var edt = require('express-debug');
 
-    /* you are using different environments, right? =) */
-    app.configure('development', function() {
-        var edt = require('express-debug');
+    app.use(edt({/* settings */}));
+})
 
-        app.use(edt({/* settings */}));
-    })
-
-    /* ... application logic ... */
+/* ... application logic ... */
+```
 
 ###Issues
 Pull requests, feature requests, bug reports, and style breakage reports welcome!
