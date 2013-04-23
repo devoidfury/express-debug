@@ -99,7 +99,7 @@ module.exports = function(settings) {
                     callback(err);
                 } else {
                     str = (loc === undefined) ? str + toolbar :
-                        str.substring(0, loc - 1) + toolbar + str.substring(loc);
+                        str.substring(0, loc) + toolbar + str.substring(loc);
                     callback(err, str);
                 }
             });
