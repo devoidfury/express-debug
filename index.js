@@ -3,6 +3,7 @@ module.exports = function(settings) {
     var jade = require('jade'),
         path = require('path'),
         fs = require('fs'),
+        theme = null,
         template = path.join(__dirname, 'toolbar.jade'),
 
         script = fs.readFileSync(path.join(__dirname, 'assets', 'js.js'), 'utf-8'),
@@ -11,6 +12,9 @@ module.exports = function(settings) {
     settings = settings || {};
     settings.depth = settings.depth || 4;
 
+    if (settings.theme) {
+        theme = fs.readFileSync(settings.theme, 'utf-8');
+    }
 
     var isAbsolute = function(path){
         return ('/' === path[0]) || (':' === path[1] && '\\' === path[2]);
@@ -91,7 +95,8 @@ module.exports = function(settings) {
                 req_safe: req_safe,
                 settings: settings,
                 script: script,
-                style: style
+                style: style,
+                theme: theme
             };
 
             jade.renderFile(template, opts, function(err, toolbar) {
@@ -99,7 +104,7 @@ module.exports = function(settings) {
                     callback(err);
                 } else {
                     str = (loc === undefined) ? str + toolbar :
-                        str.substring(0, loc - 1) + toolbar + str.substring(loc);
+                        str.substring(0, loc) + toolbar + str.substring(loc);
                     callback(err, str);
                 }
             });
