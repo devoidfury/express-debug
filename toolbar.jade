@@ -1,5 +1,8 @@
 style(type='text/css')!=style
 
+- if (theme)
+  style(type='text/css')!=theme
+
 mixin print_val(val, depth)
     - if (val === undefined)
         span.undefined undefined
