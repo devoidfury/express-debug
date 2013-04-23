@@ -3,7 +3,10 @@ module.exports = function(settings) {
     var jade = require('jade'),
         path = require('path'),
         fs = require('fs'),
-        template = path.join(__dirname, 'toolbar.jade');
+        template = path.join(__dirname, 'toolbar.jade'),
+
+        script = fs.readFileSync(path.join(__dirname, 'assets', 'js.js'), 'utf-8'),
+        style = fs.readFileSync(path.join(__dirname, 'assets', 'style.css'), 'utf-8');
 
     settings = settings || {};
     settings.depth = settings.depth || 4;
@@ -86,7 +89,9 @@ module.exports = function(settings) {
                 template: view_template,
                 req: req,
                 req_safe: req_safe,
-                settings: settings
+                settings: settings,
+                script: script,
+                style: style
             };
 
             jade.renderFile(template, opts, function(err, toolbar) {
