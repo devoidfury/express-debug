@@ -14,6 +14,7 @@ Compatible with express 3.x
 ### Settings
 
 __depth:__ How deep to recurse through printed objects. (Default: 4)
+
 __theme:__ Absolute path to a css file to include and override EDT's default css.
 
 ### Usage
