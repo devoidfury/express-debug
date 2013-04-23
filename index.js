@@ -13,7 +13,12 @@ module.exports = function(settings) {
     settings.depth = settings.depth || 4;
 
     if (settings.theme) {
-        theme = fs.readFileSync(settings.theme, 'utf-8');
+        try {
+            theme = fs.readFileSync(settings.theme, 'utf-8');
+        } catch (e) {
+            console.error('EDT: error loading css file at ' + settings.theme);
+            console.error('please check that the path is correct.');
+        }
     }
 
     var isAbsolute = function(path){
