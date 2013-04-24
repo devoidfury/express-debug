@@ -17,6 +17,11 @@ __depth:__ How deep to recurse through printed objects. (Default: 4)
 
 __theme:__ Absolute path to a css file to include and override EDT's default css.
 
+__extra_panels:__ additional panels to show. See included panels for proper structure, each panel is a function (Default: [])
+
+__panels:__ allows changing the default panels (ex: remove a panel) (Default: ['locals', 'request', 'session', 'template'])
+
+
 ### Usage
 
 #### Install
@@ -43,6 +48,10 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+* **0.2.0**
+    * pluggable panels
+    * theme addition and bugfix by jaketrent
+
 * **0.1.2**
     * objects can now be collapsed
     * functions are now collapsed by default, showing only # of formal args and name, but can be expanded
@@ -51,11 +60,6 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 * **0.1.1**
     * remove environment checks
     * fix "view engine" directive, make template reading safer
-
-
-### Goals for 0.2.0
-* Cleaner/modular project structure
-* Pluggable panels
 
 
 ### License - MIT
