@@ -22,7 +22,7 @@ mixin print_val(val, depth)
 
 mixin print_obj(obj, depth)
     - depth = depth || 0;
-    - if (depth < settings.depth)
+    - if (depth < EDTsettings.depth)
         table.object
             thead: tr.collapse
                 th
@@ -40,4 +40,4 @@ mixin print_obj(obj, depth)
                         td(colspan=2): mixin print_val(val, depth)
                 - })
     - else
-        span.exceeded (Depth exceeded; settings.depth: #{settings.depth})
+        span.exceeded (Depth exceeded; settings.depth: #{EDTsettings.depth})

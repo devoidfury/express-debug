@@ -1,47 +1,26 @@
 include ../assets/style.css
-
 - if (theme)
   style(type='text/css')!=theme
 
 include mixins
 
-mixin display
-    .tab#EDT-locals.active
-        h4 res.locals
-        mixin print_obj(res_locals)
-
-        h4 app.locals
-        mixin print_obj(app_locals)
-
-    .tab#EDT-request
-        h4 req
-        mixin print_obj(req_safe)
-
-    - session = req.session || {};
-    .tab#EDT-session
-        h4 session
-        mixin print_obj(session)
-
-    .tab#EDT-template
-        h4 Template
-            span !{template_name}
-        pre #{template}
-
 a#EDT-show EDT
-
 #EDT
     a#EDT-close X
     table#EDT-layout
         tr
             td#EDT-main
-                mixin display
+                - edt_first = ' active'
+                - panels.forEach(function(panel){
+                    div(class='tab' + edt_first, id='EDT-' + panel.name)!= panel.html
+                    - if (edt_first) edt_first = ''
+                - })
             td#EDT-sb
                 h2 express-debug
                 p #{req.method} #{req.path}
                 ul
-                    li: a(href='#EDT-locals') Locals
-                    li: a(href='#EDT-session') Session
-                    li: a(href='#EDT-template') Template
-                    li: a(href='#EDT-request') Request
+                    - panels.forEach(function(panel){
+                        li: a(href='#EDT-' + panel.name)= panel.name
+                    - })
 
 include ../assets/js.js
