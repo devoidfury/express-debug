@@ -98,16 +98,22 @@
 }
 #EDT h4 span { padding-left: 20px; font-weight: normal; font-size: 14px; }
 
-#EDT table.object {
+#EDT table.profile, #EDT table.object {
     border: 1px solid #DDD;
-    table-layout:fixed;
     width: 100%;
-    border-collapse:collapse;
+    border-collapse: collapse;
     margin-bottom: 12px;
 }
-#EDT .object th { font-weight: bold; }
-#EDT .object tr:nth-child(2n) { background-color: rgba(0, 0, 0, 0.03); }
-#EDT .object th, #EDT .object td { padding: 8px; word-wrap: break-word; color: #000; text-align: left; }
+#EDT table.object { table-layout:fixed; }
+
+#EDT th { font-weight: bold; }
+#EDT .object tr:nth-child(2n), #EDT table.profile tr:nth-child(2n) { background-color: rgba(0, 0, 0, 0.03); }
+
+#EDT .object th,
+#EDT .profile th,
+#EDT .object td,
+#EDT .profile td { padding: 8px; word-wrap: break-word; color: #000; text-align: left; }
+
 #EDT .object td:first-child, #EDT .object th:first-child { width: 126px; }
 
 #EDT .object .collapse, #EDT .object .expand { cursor: pointer; }

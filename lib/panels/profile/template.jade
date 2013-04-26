@@ -1,0 +1,24 @@
+h4 profile
+table.profile
+    thead: tr.collapse
+        th action
+        th action route
+        th action handle
+        th time
+    tbody
+        tr
+            td req total
+            td(colspan=2) *
+            td #{global_time.seconds}s + #{global_time.milliseconds}ms
+
+        - middleware.forEach(function(val, i){
+            tr
+                td middleware ##{i}
+                td
+                    - if (val.action.route === '')
+                        span *
+                    - else
+                        span.string val.action.route
+                td: mixin print_val(val.action.original, 0)
+                td #{val.time.seconds}s + #{val.time.milliseconds}ms
+        - })
