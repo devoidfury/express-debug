@@ -16,6 +16,8 @@ mixin print_val(val, depth)
     - else if (typeof val === 'function')
         a.showFn args: #{val.length}, fn name: #{val.name}
         pre.fn !{val}
+        - if (Object.keys(val).length)
+            mixin print_obj(val, depth + 1)
     - else
         - _type = typeof val;
         span(class="#{_type}") #{val}
