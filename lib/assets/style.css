@@ -56,7 +56,7 @@
 #EDT #EDT-main { background-color: rgba(255, 255, 255, 0.95); padding: 20px; }
 
 #EDT #EDT-sb {
-    width: 260px;
+    width: 200px;
     background-color: rgba(33, 33, 33, 0.95);
     color: #CCC;
     font-size: 16px;
@@ -87,7 +87,7 @@
 #EDT .tab { display: none; }
 #EDT .tab.active { display: block; }
 
-#EDT h2 { font-size: 22px; font-weight: bold; color: #CCC; margin-bottom: 14px; }
+#EDT h2 { font-size: 18px; font-weight: bold; color: #CCC; margin-bottom: 14px; }
 #EDT h4 {
     display: inline-block;
     padding-left: 20px;
@@ -97,6 +97,10 @@
     margin-bottom: 12px;
 }
 #EDT h4 span { padding-left: 20px; font-weight: normal; font-size: 14px; }
+
+#EDT .profile th:nth-child(1) { width: 10%; min-width: 130px}
+#EDT .profile th:nth-child(2) { width: 18%; min-width: 100px}
+#EDT .profile th:nth-child(4) { width: 10%; min-width: 100px}
 
 #EDT table.profile, #EDT table.object {
     border: 1px solid #DDD;
@@ -114,7 +118,8 @@
 #EDT .object td,
 #EDT .profile td { padding: 8px; word-wrap: break-word; color: #000; text-align: left; }
 
-#EDT .object td:first-child, #EDT .object th:first-child { width: 126px; }
+#EDT .object th:first-child { min-width: 126px; width: 13%; }
+#EDT .object th.arr:first-child { width: 60px; min-width: 60px; }
 
 #EDT .object .collapse, #EDT .object .expand { cursor: pointer; }
 #EDT .object .indicator { text-align: right; font-size: 16px; color: #000; }

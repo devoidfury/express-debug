@@ -24,22 +24,25 @@ mixin print_val(val, depth)
 
 mixin print_obj(obj, depth)
     - depth = depth || 0;
-    - if (depth < EDTsettings.depth)
-        table.object
-            thead: tr.collapse
-                th
+
+    - if (!obj.EDT_hidden)
+        - if (depth < EDTsettings.depth)
+
+            table.object
+                thead: tr.collapse
                     - if (obj instanceof Array)
-                        | index
+                        th.arr index
                     - else
-                        | name
-                th value
-                th.indicator
-            tbody
-                - Object.keys(obj).forEach(function(prop){
-                    - val = obj[prop]
-                    tr
-                        td !{prop}
-                        td(colspan=2): mixin print_val(val, depth)
-                - })
-    - else
-        span.exceeded (Depth exceeded; settings.depth: #{EDTsettings.depth})
+                        th name
+                    th value
+                    th.indicator
+                tbody
+                    - Object.keys(obj).forEach(function(prop){
+                        - var val = obj[prop]
+                        - if (!val || val.EDT_hidden === undefined)
+                            tr
+                                td !{prop}
+                                td(colspan=2): mixin print_val(val, depth)
+                    - })
+        - else
+            span.exceeded (Depth exceeded; settings.depth: #{EDTsettings.depth})

@@ -15,7 +15,7 @@ a#EDT-show EDT
                 - })
             td#EDT-sb
                 h2 express-debug
-                p #{req.method} #{req.path}
+                p #{req.method} method
                 ul
                     - panels.forEach(function(panel){
                         li: a(href='#EDT-' + panel.name)= panel.name
