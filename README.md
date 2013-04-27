@@ -17,7 +17,7 @@ Compatible with express 3.x
 
 `theme` - Absolute path to a css file to include and override EDT's default css.
 
-`extra_panels` - additional panels to show. See included panels for proper structure, each panel is a function (Default: `[]`)
+`extra_panels` - additional panels to show. See docs below and included panels for proper structure, each panel is an object (Default: `[]`)
 
 `panels` - allows changing the default panels (ex: remove a panel) (Default: `['locals', 'request', 'session', 'template']`)
 
@@ -46,21 +46,54 @@ app.use(edt({/* settings */}));
 
 ### Panels
 
-#### locals
-app.locals, res.locals, and options passed to the template (merged into res.locals)
+`locals` - app.locals, res.locals, and options passed to the template (merged into res.locals)
 
-#### request
-req info. ip, body, query, files, route info, cookies, headers
+`request` - req info. ip, body, query, files, route info, cookies, headers
 
-#### session
-everything in req.session
+`session` - everything in req.session
 
-#### template
-view name, template file
+`template` - view name, template file
 
-#### profile
-total req processing time. middleware, param, and route timings.
-*Note:* This panel is auto-loaded when app is passed in to edt(), and should not be explicitly added to settings.
+`profile` - total req processing time. middleware, param, and route timings.
+(**Note:** This panel is auto-loaded when app is passed in to edt(), and should not be explicitly added to settings.)
+
+#### Custom Panels
+Each panel is an object, in the form:
+
+```js
+my_panel = {
+    name: 'panel_name',
+    template: '/absolute/path/to/template.jade',
+    process: function(locals){
+        // locals: {app, req, res, view, locals}
+
+        // ... logic here ...
+        return { locals: {/* my template locals */}};
+    }
+}
+```
+Optionally, panels supports the following optional additional properties:
+
+initialize:
+```js
+my_panel.initialize = function(app) {
+    // perform initialization here, when the application loads
+}
+```
+
+request:
+```js
+my_panel.request = function(req) {
+    // perform initialization here, for every request
+}
+```
+
+finalize:
+```js
+my_panel.finalize = function(req) {
+    // finish up here, before rendering express-debug and panels
+}
+```
 
 
 ### Issues
@@ -69,28 +102,28 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 ### Changelog
 * **0.2.2**
-    * finalize panel api
+  * finalize panel api
 
 
 * **0.2.1**
-    * add profiler panel
-    * modified style
+  * add profiler panel
+  * modified style
 
 
 * **0.2.0**
-    * pluggable panels
-    * theme addition and bugfix by jaketrent
+  * pluggable panels
+  * theme addition and bugfix by jaketrent
 
 
 * **0.1.2**
-    * objects can now be collapsed
-    * functions are now collapsed by default, showing only # of formal args and name, but can be expanded
-    * separated css and js from main toolbar template
+  * objects can now be collapsed
+  * functions are now collapsed by default, showing only # of formal args and name, but can be expanded
+  * separated css and js from main toolbar template
 
 
 * **0.1.1**
-    * remove environment checks
-    * fix "view engine" directive, make template reading safer
+  * remove environment checks
+  * fix "view engine" directive, make template reading safer
 
 
 ### License - MIT
