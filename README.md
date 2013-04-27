@@ -44,23 +44,49 @@ app.use(edt({/* settings */}));
 ```
 
 
+### Panels
+
+#### locals
+app.locals, res.locals, and options passed to the template (merged into res.locals)
+
+#### request
+req info. ip, body, query, files, route info, cookies, headers
+
+#### session
+everything in req.session
+
+#### template
+view name, template file
+
+#### profile
+total req processing time. middleware, param, and route timings.
+*Note:* This panel is auto-loaded when app is passed in to edt(), and should not be explicitly added to settings.
+
+
 ### Issues
 Pull requests, feature requests, bug reports, and style breakage reports welcome!
 
 
 ### Changelog
+* **0.2.2**
+    * finalize panel api
+
+
 * **0.2.1**
     * add profiler panel
     * modified style
+
 
 * **0.2.0**
     * pluggable panels
     * theme addition and bugfix by jaketrent
 
+
 * **0.1.2**
     * objects can now be collapsed
     * functions are now collapsed by default, showing only # of formal args and name, but can be expanded
     * separated css and js from main toolbar template
+
 
 * **0.1.1**
     * remove environment checks
