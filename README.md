@@ -13,13 +13,13 @@ Compatible with express 3.x
 
 ### Settings
 
-__depth:__ How deep to recurse through printed objects. (Default: 4)
+`depth` - How deep to recurse through printed objects. (Default: `4`)
 
-__theme:__ Absolute path to a css file to include and override EDT's default css.
+`theme` - Absolute path to a css file to include and override EDT's default css.
 
-__extra_panels:__ additional panels to show. See included panels for proper structure, each panel is a function (Default: [])
+`extra_panels` - additional panels to show. See included panels for proper structure, each panel is a function (Default: `[]`)
 
-__panels:__ allows changing the default panels (ex: remove a panel) (Default: ['locals', 'request', 'session', 'template'])
+`panels` - allows changing the default panels (ex: remove a panel) (Default: `['locals', 'request', 'session', 'template']`)
 
 
 ### Usage
@@ -31,13 +31,14 @@ __panels:__ allows changing the default panels (ex: remove a panel) (Default: ['
 ```js
 var express = require('express');
 var app = express();
+var edt = require('express-debug');
 
-/* you are using different environments, right? =) */
-app.configure('development', function() {
-    var edt = require('express-debug');
+// invoke with profiler
+app.use(edt(app, {/* settings */}));
 
-    app.use(edt({/* settings */}));
-})
+// OR invoke without profiler
+app.use(edt({/* settings */}));
+
 
 /* ... application logic ... */
 ```
@@ -48,6 +49,10 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+* **0.2.1**
+    * add profiler panel
+    * modified style
+
 * **0.2.0**
     * pluggable panels
     * theme addition and bugfix by jaketrent
