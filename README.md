@@ -108,6 +108,10 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+* **0.2.3**
+  * add software info panel
+  * clean up
+
 * **0.2.2**
   * finalize panel api
 
