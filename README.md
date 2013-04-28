@@ -19,7 +19,7 @@ Compatible with express 3.x
 
 `extra_panels` - additional panels to show. See docs below and included panels for proper structure, each panel is an object (Default: `[]`)
 
-`panels` - allows changing the default panels (ex: remove a panel) (Default: `['locals', 'request', 'session', 'template']`)
+`panels` - allows changing the default panels (ex: remove a panel) (Default: `['locals', 'request', 'session', 'template', 'software_info']`)
 
 
 ### Usage
