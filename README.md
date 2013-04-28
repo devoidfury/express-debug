@@ -54,6 +54,8 @@ app.use(edt({/* settings */}));
 
 `template` - view name, template file
 
+`software_info` - shows current versions of node and libraries installed locally (not globally installed packages!)
+
 `profile` - total req processing time. middleware, param, and route timings.
 (**Note:** This panel is auto-loaded when app is passed in to edt(), and should not be explicitly added to settings.)
 
@@ -91,9 +93,14 @@ my_panel.request = function(req) {
 finalize:
 ```js
 my_panel.finalize = function(req) {
-    // finish up here, before rendering express-debug and panels
+    // finish up here, before rendering anything
 }
 ```
+
+
+### TODO
+* profile template rendering
+* improve styling
 
 
 ### Issues
