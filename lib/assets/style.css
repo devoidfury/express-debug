@@ -1,3 +1,10 @@
+/* make standalone page show express-debug by default and disable show/hide buttons */
+.express-debug.standalone #EDT #EDT-close { display: none; }
+.express-debug.standalone #EDT-show { display: none; }
+.express-debug.standalone #EDT { display: block; }
+
+.express-debug { position: static !important; }
+
 /* SHOW/HIDE buttons */
 #EDT-show {
     position: fixed;
