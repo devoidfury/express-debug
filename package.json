@@ -1,6 +1,6 @@
 {
   "name": "express-debug",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "debug toolbar middleware for developing applications in expressjs",
   "main": "index.js",
   "scripts": {},
