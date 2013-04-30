@@ -46,7 +46,7 @@ app.configure('development', function() {
 `panels` - allows changing the default panels (ex: remove a panel)
 (Default: `['locals', 'request', 'session', 'template', 'software_info', 'profile']`)
 
-`path` - path to render standalone express-debug [set to `null` or `false` to disable]
+`path` - path to render standalone express-debug \[set to `null` or `false` to disable\]
 (Default: `/express-debug`)
 
 ### Panels
