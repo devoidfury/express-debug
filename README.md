@@ -98,9 +98,9 @@ my_panel.finalize = function(req) {
 ```
 
 ### 1.0 Roadmap
-* basic non-html request tracking/profiling
+* basic non-html request ~~tracking~~/profiling
 * profile template rendering
-* cleaner structure
+* ~~cleaner structure~~
 
 
 ### TODO
