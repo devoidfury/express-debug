@@ -63,6 +63,8 @@ app.configure('development', function() {
 
 `profile` - total req processing time. middleware, param, and route timings.
 
+`other_requests` - shows details on non-page requests made to the server (not a default panel, use extra_panels setting to invoke. `{extra_panels: ['other_requests']}`)
+
 
 #### Custom Panels
 Each panel is an object, in the form:
@@ -100,15 +102,28 @@ my_panel.request = function(req) {
 finalize:
 ```js
 my_panel.finalize = function(req) {
-    // finish up here, before rendering anything
+    // finish up here, as soon as render is called
+}
+```
+
+pre_render:
+```js
+my_panel.pre_render = function(req) {
+    // just before rendering
+}
+
+```
+post_render:
+```js
+my_panel.post_render = function(req) {
+    // just after rendering
 }
 ```
 
 
 ### TODO
-* profile template rendering
 * improve styling
-* non-html panel
+* profile non-html requests
 
 
 ### Issues
@@ -122,6 +137,8 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
   * profile panel now acts like a regular panel
   * add standalone express-debug page mounted at `path` setting
   * add `standalone` panel setting
+  * add `pre-render` and `post-render` panel hooks
+  * profile panel now additionally profiles rendering
 
 
 * **0.2.4**
