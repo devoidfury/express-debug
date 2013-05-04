@@ -120,15 +120,9 @@ my_panel.post_render = function(req) {
 }
 ```
 
-### 1.0 Roadmap
-* basic non-html request ~~tracking~~/profiling
-* ~~profile template rendering~~
-* ~~cleaner structure~~
-
 
 ### TODO
 * improve styling
-* profile non-html requests
 
 
 ### Issues
