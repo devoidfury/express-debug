@@ -11,9 +11,16 @@
   "author": "Tom Hunkapiller",
   "license": "MIT",
   "dependencies": {
-    "jade": "0.29.0"
+    "jade": "0.29.0",
+    "xtend": "2.0.3"
   },
-
+  "keywords": [
+    "express",
+    "debug",
+    "tool",
+    "development",
+    "toolbar"
+  ],
   "peerDependencies": {
     "express": "3.x"
   }

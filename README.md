@@ -6,20 +6,12 @@ It adds an 'EDT' tab to the right side of pages that, when clicked, displays inf
 such as template variables (locals), current session, useful request data, and
 current template.
 
-express-debug should *NOT* be used in production environments.
+If your application doesn't serve HTML, no worries, a standalone express-debug
+panel is mounted at `/express-debug`. See settings section for more information.
+
+express-debug should **NOT** be used in production environments.
 
 Compatible with express 3.x
-
-
-### Settings
-
-`depth` - How deep to recurse through printed objects. (Default: `4`)
-
-`theme` - Absolute path to a css file to include and override EDT's default css.
-
-`extra_panels` - additional panels to show. See docs below and included panels for proper structure, each panel is an object (Default: `[]`)
-
-`panels` - allows changing the default panels (ex: remove a panel) (Default: `['locals', 'request', 'session', 'template', 'software_info']`)
 
 
 ### Usage
@@ -31,18 +23,31 @@ Compatible with express 3.x
 ```js
 var express = require('express');
 var app = express();
-var edt = require('express-debug');
 
-// invoke with profiler
-app.use(edt(app, {/* settings */}));
-
-// OR invoke without profiler
-app.use(edt({/* settings */}));
-
+app.configure('development', function() {
+    var edt = require('express-debug');
+    edt(app, {/* settings */});
+});
 
 /* ... application logic ... */
 ```
 
+
+### Settings
+
+`depth` - How deep to recurse through printed objects.
+(Default: `4`)
+
+`theme` - Absolute path to a css file to include and override EDT's default css.
+
+`extra_panels` - additional panels to show. See docs below and included panels for proper structure, each panel is an object
+(Default: `[]`)
+
+`panels` - allows changing the default panels (ex: remove a panel)
+(Default: `['locals', 'request', 'session', 'template', 'software_info', 'profile']`)
+
+`path` - path to render standalone express-debug \[set to `null` or `false` to disable\]
+(Default: `/express-debug`)
 
 ### Panels
 
@@ -57,7 +62,9 @@ app.use(edt({/* settings */}));
 `software_info` - shows current versions of node and libraries installed locally (not globally installed packages!)
 
 `profile` - total req processing time. middleware, param, and route timings.
-(**Note:** This panel is auto-loaded when app is passed in to edt(), and should not be explicitly added to settings.)
+
+`other_requests` - shows details on non-page requests made to the server (not a default panel, use extra_panels setting to invoke. `{extra_panels: ['other_requests']}`)
+
 
 #### Custom Panels
 Each panel is an object, in the form:
@@ -76,6 +83,8 @@ my_panel = {
 ```
 Optionally, panels supports the following optional additional properties:
 
+standalone: set this property to `true` to display this panel on the standalone express-debug mount
+
 initialize:
 ```js
 my_panel.initialize = function(app) {
@@ -93,7 +102,21 @@ my_panel.request = function(req) {
 finalize:
 ```js
 my_panel.finalize = function(req) {
-    // finish up here, before rendering anything
+    // finish up here, as soon as render is called
+}
+```
+
+pre_render:
+```js
+my_panel.pre_render = function(req) {
+    // just before rendering
+}
+
+```
+post_render:
+```js
+my_panel.post_render = function(req) {
+    // just after rendering
 }
 ```
 
@@ -105,6 +128,7 @@ my_panel.finalize = function(req) {
 
 ### TODO
 * improve styling
+* profile non-html requests
 
 
 ### Issues
@@ -112,6 +136,16 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+
+* **1.0.0** API changes
+  * no longer used as a regular middleware, invoke with `edt(app[, settings])` instead
+  * profile panel now acts like a regular panel
+  * add standalone express-debug page mounted at `path` setting
+  * add `standalone` panel setting
+  * add `pre-render` and `post-render` panel hooks
+  * profile panel now additionally profiles rendering
+
+
 * **0.2.4**
   * no longer breaks error handling middleware
 

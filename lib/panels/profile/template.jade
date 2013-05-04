@@ -38,7 +38,12 @@ table.profile
                 td: mixin print_val(val.action.handler, 0)
                 td #{val.time.seconds * 1000 + val.time.milliseconds}ms
         - })
+        - if (render)
+            tr
+                td(colspan=3) render
+                td #{render.seconds * 1000 + render.milliseconds}ms
 
 h4 notes:
 p params and routes are executed inside the router middleware
 p shown times are based on <a href="http://nodejs.org/api/process.html#process_process_hrtime">process.hrtime()</a>
+p to show a function's name, use a function name instead of an anonymous definition. ex: routes.users.login = function userLogin(req, res, next) { ...
