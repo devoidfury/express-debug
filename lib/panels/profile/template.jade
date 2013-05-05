@@ -4,12 +4,12 @@ table.profile
         th name
         th route
         th handler
-        th time
+        th.right time
     tbody
         tr
             td req total
             td(colspan=2) *
-            td #{global_time.seconds * 1000 + global_time.milliseconds}ms
+            td.right #{(global_time.seconds * 1000 + global_time.milliseconds).toFixed(2)}ms
 
         - middleware.forEach(function(val, i){
             tr
@@ -18,9 +18,9 @@ table.profile
                     - if (val.action.route === '')
                         span *
                     - else
-                        span.string val.action.route
+                        span.string #{val.action.route}
                 td: mixin print_val(val.action.handler, 0)
-                td #{val.time.seconds * 1000 + val.time.milliseconds}ms
+                td.right #{(val.time.seconds * 1000 + val.time.milliseconds).toFixed(2)}ms
         - })
 
         - params.forEach(function(val, i){
@@ -28,7 +28,7 @@ table.profile
                 td param ##{i}
                 td: span */:#{val.action.param}/*
                 td: mixin print_val(val.action.action, 0)
-                td #{val.time.seconds * 1000 + val.time.milliseconds}ms
+                td.right #{(val.time.seconds * 1000 + val.time.milliseconds).toFixed(2)}ms
         - })
 
         - routes.forEach(function(val, i){
@@ -36,12 +36,12 @@ table.profile
                 td route ##{i}
                 td: span #{val.action.method} #{val.action.route}
                 td: mixin print_val(val.action.handler, 0)
-                td #{val.time.seconds * 1000 + val.time.milliseconds}ms
+                td.right #{(val.time.seconds * 1000 + val.time.milliseconds).toFixed(2)}ms
         - })
         - if (render)
             tr
                 td(colspan=3) render
-                td #{render.seconds * 1000 + render.milliseconds}ms
+                td.right #{(render.seconds * 1000 + render.milliseconds).toFixed(2)}ms
 
 h4 notes:
 p params and routes are executed inside the router middleware

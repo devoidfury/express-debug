@@ -158,6 +158,8 @@
 #EDT .collapse .indicator:after { content: '(-)'; }
 #EDT .expand .indicator:after { content: '(+)'; }
 
+#EDT table .right { text-align: right; }
+
 /* value output styling */
 #EDT .string { color: #179900 }
 #EDT .string:before, #EDT .string:after { content: '"'; color: #000; }

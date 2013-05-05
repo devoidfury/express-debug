@@ -27,7 +27,6 @@ mixin print_obj(obj, depth)
 
     - if (!obj.EDT_hidden)
         - if (depth < EDTsettings.depth)
-
             table.object
                 thead: tr.collapse
                     - if (obj instanceof Array)
