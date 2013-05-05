@@ -2,7 +2,7 @@ div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug
     include ../assets/style.css
     - if (theme)
         style(type='text/css')!=theme
-    a#EDT-show EDT
+    a(id="EDT-show", href="javascript:void(0);") EDT
     #EDT
         - var tmp_p = ''
         div#EDT-menu
@@ -17,7 +17,7 @@ div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug
                     div.sep
                     li: a(href='#EDT-' + panel.name, title=panel.name + ' panel')= panel.name
                 - })
-            a(id="EDT-close", title="close express-debug toolbar") CLOSE
+            a(id="EDT-close", title="close express-debug toolbar", href="javascript:void(0);") CLOSE
         #EDT-main
             - edt_first = ' active'
                 - panels.forEach(function(panel){
