@@ -130,6 +130,10 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+* **1.0.1**
+  * sidebar moved to top and fixed position for better UX
+  * fix: render error no longer crashes application
+
 
 * **1.0.0** API changes
   * no longer used as a regular middleware, invoke with `edt(app[, settings])` instead

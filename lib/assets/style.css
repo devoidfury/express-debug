@@ -94,6 +94,7 @@
     color: #CCC;
     font-size: 18px;
     line-height: 32px;
+    border-bottom: 2px solid rgba(33, 33, 33, 0.95);
 }
 
 #EDT-menu span.text {
