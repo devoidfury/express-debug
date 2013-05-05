@@ -3,7 +3,21 @@
 .express-debug.standalone #EDT-show { display: none; }
 .express-debug.standalone #EDT { display: block; }
 
+/* core styling */
 .express-debug { position: static !important; }
+
+.express-debug * {
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    color: inherit;
+    background: none repeat transparent;
+    font-family: Consolas, Monaco, monospace, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+.express-debug a { cursor: pointer !important; }
 
 /* SHOW/HIDE buttons */
 #EDT-show {
@@ -15,7 +29,6 @@
     background-color: rgba(255, 255, 255, 0.55);
     border: 2px solid rgba(0, 0, 0, 0.4);
     padding: 10px;
-    font-family: Consolas, Monaco, monospace, sans-serif;;
 
     font-size: 20px;
     font-weight: bold;
@@ -25,61 +38,49 @@
 }
 #EDT-show:hover { color: #af2b2b; }
 
+
 #EDT #EDT-close {
     font-weight: bold;
     display: block;
-    text-align: center;
-    cursor: pointer;
     position: absolute;
     top: 0;
     right: 20px;
+    border-left: 1px solid #717171;
+    border-right: 1px solid #717171;
 }
 
 /* main layout */
 #EDT {
     display: none;
+    font-size: 14px;
 
     z-index: 1000;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-
-    font-size: 14px;
 }
 
 #EDT td, #EDT th { vertical-align: top; }
 
 #EDT #EDT-main {
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 50px 20px 20px 20px;
+    margin-top: 34px;
+    padding: 20px 20px 20px 20px;
     width: 100%;
     min-height: 100%;
 }
 
-/* core styling */
-#EDT * {
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit;
-    color: inherit;
-    background: none repeat transparent;
-    font-family: Consolas, Monaco, monospace, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-#EDT, #EDT * { box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
 
 #EDT .tab { display: none; }
 #EDT .tab.active { display: block; }
 
-#EDT h2 { font-size: 18px; font-weight: bold; color: #CCC; margin-bottom: 14px; }
+#EDT h2, #EDT h4, #EDT-menu { font-size: 18px }
+#EDT h2 { font-weight: bold; color: #CCC; margin-bottom: 14px; }
 #EDT h4 {
     display: inline-block;
     padding-left: 20px;
     font-weight: bold;
-    font-size: 18px;
     color: #000;
     margin-bottom: 12px;
 }
@@ -92,12 +93,13 @@
 
     background-color: rgba(33, 33, 33, 0.95);
     color: #CCC;
-    font-size: 18px;
     line-height: 32px;
-    border-bottom: 2px solid rgba(33, 33, 33, 0.95);
+    height: 33px;
+    border-bottom: 1px solid #717171;
+    outline: 1px solid rgba(33, 33, 33, 0.95);
 }
 
-#EDT-menu span.text {
+#EDT-menu span.text, #EDT-menu a {
     display: inline-block;
     padding: 0 10px 0 10px;
 }
@@ -110,19 +112,11 @@
     display: inline-block;
 }
 
-#EDT-menu ul {
+#EDT-menu ul, #EDT-menu li, #EDT-menu a {
     display: inline-block;
-}
-
-#EDT-menu ul li {
     list-style: none;
-    display: inline-block;
-}
-#EDT-menu a {
     color: #df3333;
-    display: inline-block;
     text-decoration: none;
-    padding: 0 10px 0 10px;
 }
 
 #EDT-menu a:hover {
@@ -177,16 +171,13 @@
 /* template code and functions */
 #EDT pre { background-color: #F5F5F5; color: #444; border: 1px solid #DDD; padding: 8px; }
 #EDT pre.fn { display: none; margin-top: 6px; }
-
 #EDT .showFn, #EDT .hideFn { cursor: pointer; }
-#EDT .showFn:before, #EDT .hideFn:before { content: 'fn () { '; color: #666; font-weight: bold; }
-#EDT .showFn:after { content: ' } (+)'; color: #666; font-weight: bold; }
-#EDT .hideFn:after { content: ' } (-)'; color: #666; font-weight: bold; }
+#EDT .showFn:before, #EDT .showFn:after, #EDT .hideFn:before, #EDT .hideFn:after { color: #666; font-weight: bold; }
+#EDT .showFn:before, #EDT .hideFn:before { content: 'fn () { '; }
+#EDT .showFn:after { content: ' } (+)'; }
+#EDT .hideFn:after { content: ' } (-)'; }
 
-/* fixes */
-#EDT .indicator, #EDT.showFn, #EDT.hideFn { /* fix text selection when trying to use expand/collapse */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
+/* fix text selection when trying to use expand/collapse */
+#EDT .indicator, #EDT.showFn, #EDT.hideFn {
+    -webkit-user-select: none;-moz-user-select: none;-khtml-user-select: none;-ms-user-select: none;user-select: none;
 }
