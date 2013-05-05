@@ -65,6 +65,8 @@ app.configure('development', function() {
 
 `other_requests` - shows details on non-page requests made to the server (not a default panel, use extra_panels setting to invoke. `{extra_panels: ['other_requests']}`)
 
+`nav` - links to every GET route in your app. (not a default panel)
+
 
 #### Custom Panels
 Each panel is an object, in the form:

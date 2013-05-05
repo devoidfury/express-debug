@@ -127,6 +127,21 @@
 
 #EDT h4 span { padding-left: 20px; font-weight: normal; font-size: 14px; }
 
+#EDT .edt-nav li {
+    display: block;
+    list-style: none;
+    padding: 5px;
+}
+#EDT .edt-nav a {
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+#EDT .edt-nav a:hover {
+    text-decoration: underline;
+}
+
 #EDT .profile th:nth-child(1) { width: 10%; min-width: 130px}
 #EDT .profile th:nth-child(2) { width: 18%; min-width: 100px}
 #EDT .profile th:nth-child(4) { width: 10%; min-width: 100px}
