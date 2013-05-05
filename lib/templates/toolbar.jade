@@ -7,14 +7,14 @@ div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug
         - var tmp_p = ''
         div#EDT-menu
             span.text express-debug
-            span.sep
+            div.sep
             - if (req.path !== EDTsettings.path)
                 span.text #{req.method} #{req.path}
             - else
                 span.text Standalone Panel
             ul
                 - panels.forEach(function(panel){
-                    span.sep
+                    div.sep
                     li: a(href='#EDT-' + panel.name, title=panel.name + ' panel')= panel.name
                 - })
             a(id="EDT-close", title="close express-debug toolbar") CLOSE

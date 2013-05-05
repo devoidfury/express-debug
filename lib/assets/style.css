@@ -99,12 +99,15 @@
 
 #EDT-menu span.text {
     display: inline-block;
-    padding: 0 5px 0 5px;
+    padding: 0 10px 0 10px;
 }
 
-#EDT-menu span.sep:after {
-    color: #717171;
-    content: "|";
+#EDT-menu div.sep {
+    border-left: 1px solid #717171;
+    height: 32px;
+    vertical-align: top;
+    width: 1px;
+    display: inline-block;
 }
 
 #EDT-menu ul {
@@ -119,7 +122,7 @@
     color: #df3333;
     display: inline-block;
     text-decoration: none;
-    padding: 0 5px 0 5px;
+    padding: 0 10px 0 10px;
 }
 
 #EDT-menu a:hover {
