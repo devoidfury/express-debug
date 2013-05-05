@@ -4,21 +4,25 @@ div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug
         style(type='text/css')!=theme
     a#EDT-show EDT
     #EDT
-        a#EDT-close X
-        table#EDT-layout
-            tr
-                td#EDT-main
-                    - edt_first = ' active'
-                    - panels.forEach(function(panel){
-                        div(class='tab' + edt_first, id='EDT-' + panel.name)!= panel.html
-                        - if (edt_first) edt_first = ''
-                    - })
-                td#EDT-sb
-                    h2 express-debug
-                    p #{req.method} method
-                    ul
-                        - panels.forEach(function(panel){
-                            li: a(href='#EDT-' + panel.name)= panel.name
-                        - })
+        - var tmp_p = ''
+        div#EDT-menu
+            span.text express-debug
+            span.sep
+            - if (req.path !== EDTsettings.path)
+                span.text #{req.method} #{req.path}
+            - else
+                span.text Standalone Panel
+            ul
+                - panels.forEach(function(panel){
+                    span.sep
+                    li: a(href='#EDT-' + panel.name, title=panel.name + ' panel')= panel.name
+                - })
+            a(id="EDT-close", title="close express-debug toolbar") CLOSE
+        #EDT-main
+            - edt_first = ' active'
+                - panels.forEach(function(panel){
+                    div(class='tab' + edt_first, id='EDT-' + panel.name)!= panel.html
+                    - if (edt_first) edt_first = ''
+                - })
 
     include ../assets/js.js
