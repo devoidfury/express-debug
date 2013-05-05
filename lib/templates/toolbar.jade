@@ -2,7 +2,7 @@ div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug
     include ../assets/style.css
     - if (theme)
         style(type='text/css')!=theme
-    a(id="EDT-show", href="javascript:void(0);") EDT
+    a(id="EDT-show", href="javascript:void(0);", title="Open express-debug toolbar") EDT
     #EDT
         - var tmp_p = ''
         div#EDT-menu

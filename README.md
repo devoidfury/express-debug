@@ -132,6 +132,12 @@ Pull requests, feature requests, bug reports, and style breakage reports welcome
 
 
 ### Changelog
+* **1.0.2**
+  * add basic nav panel (not a default panel)
+  * style and usability improvements
+  * bugfixes
+
+
 * **1.0.1**
   * sidebar moved to top and fixed position for better UX
   * fix: render error no longer crashes application
