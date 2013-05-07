@@ -42,7 +42,9 @@ app.configure('development', function() {
 
 `theme` - Absolute path to a css file to include and override EDT's default css.
 
-`extra_panels` - additional panels to show. See docs below and included panels for proper structure, each panel is an object
+`extra_panels` - additional panels to show. (See docs for custom panels)[https://github.com/devoidfury/blob/master/docs/custom_panels.md] and
+(included panels)[https://github.com/devoidfury/express-debug/tree/master/lib/panels]
+for proper structure, each panel is an object
 (Default: `[]`)
 
 `panels` - allows changing the default panels (ex: remove a panel)
@@ -68,61 +70,6 @@ app.configure('development', function() {
 `other_requests` - shows details on non-page requests made to the server (not a default panel, use extra_panels setting to invoke. `{extra_panels: ['other_requests']}`)
 
 `nav` - links to every GET route in your app. (not a default panel)
-
-
-#### Custom Panels
-Each panel is an object, in the form:
-
-```js
-my_panel = {
-    name: 'panel_name',
-    template: '/absolute/path/to/template.jade',
-    process: function(locals){
-        // locals: {app, req, res, view, locals}
-
-        // ... logic here ...
-        return { locals: {/* my template locals */}};
-    }
-}
-```
-Optionally, panels supports the following optional additional properties:
-
-standalone: set this property to `true` to display this panel on the standalone express-debug mount
-
-initialize:
-```js
-my_panel.initialize = function(app) {
-    // perform initialization here, when the application loads
-}
-```
-
-request:
-```js
-my_panel.request = function(req) {
-    // perform initialization here, for every request
-}
-```
-
-finalize:
-```js
-my_panel.finalize = function(req) {
-    // finish up here, as soon as render is called
-}
-```
-
-pre_render:
-```js
-my_panel.pre_render = function(req) {
-    // just before rendering
-}
-
-```
-post_render:
-```js
-my_panel.post_render = function(req) {
-    // just after rendering
-}
-```
 
 
 ### Future

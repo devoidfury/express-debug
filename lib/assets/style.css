@@ -13,6 +13,7 @@
     color: inherit;
     background: none repeat transparent;
     font-family: Consolas, Monaco, monospace, sans-serif;
+    vertical-align: baseline;
     margin: 0;
     padding: 0;
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
@@ -22,7 +23,7 @@
 /* SHOW/HIDE buttons */
 #EDT-show {
     position: fixed;
-    top: 200px;
+    top: 30%;
     right: 0;
     z-index: 1000;
 
@@ -42,9 +43,8 @@
 #EDT #EDT-close {
     font-weight: bold;
     display: block;
-    position: absolute;
-    top: 0;
-    right: 20px;
+    float: right;
+    margin-right: 20px;
     border-left: 1px solid #717171;
     border-right: 1px solid #717171;
 }
@@ -94,8 +94,7 @@
     background-color: rgba(33, 33, 33, 0.95);
     color: #CCC;
     line-height: 32px;
-    height: 33px;
-    border-bottom: 1px solid #717171;
+    border-bottom: 1px solid rgba(132, 132, 132, 0.93);
     outline: 1px solid rgba(33, 33, 33, 0.95);
 }
 
