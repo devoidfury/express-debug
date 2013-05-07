@@ -11,8 +11,10 @@ panel is mounted at `/express-debug`. See settings section for more information.
 
 express-debug should **NOT** be used in production environments.
 
-Compatible with express 3.x
+**Compatible with express 3.x and node 0.8+**
 
+
+**[Screenshot of the tool in action](http://i.imgur.com/rz3WgSp.png)**
 
 ### Usage
 
