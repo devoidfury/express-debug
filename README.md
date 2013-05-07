@@ -42,8 +42,8 @@ app.configure('development', function() {
 
 `theme` - Absolute path to a css file to include and override EDT's default css.
 
-`extra_panels` - additional panels to show. (See docs for custom panels)[https://github.com/devoidfury/blob/master/docs/custom_panels.md] and
-(included panels)[https://github.com/devoidfury/express-debug/tree/master/lib/panels]
+`extra_panels` - additional panels to show. [See docs for custom panels](https://github.com/devoidfury/blob/master/docs/custom_panels.md) and
+[included panels](https://github.com/devoidfury/express-debug/tree/master/lib/panels)
 for proper structure, each panel is an object
 (Default: `[]`)
 
