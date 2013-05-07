@@ -1,5 +1,5 @@
 # express-debug
-express-debug is a development tool for expressjs. It's simple middleware that
+express-debug is a development tool for [express](https://github.com/visionmedia/express). It's simple middleware that
 injects useful debugging output into your html, in a non-obstructive way.
 
 It adds an 'EDT' tab to the right side of pages that, when clicked, displays info
