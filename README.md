@@ -125,12 +125,10 @@ my_panel.post_render = function(req) {
 ```
 
 
-### TODO
+### Future
+* optional error page that prints better stacks
+* save more information about non-injected requests
 * improve styling
-
-
-### Issues
-Pull requests, feature requests, bug reports, and style breakage reports welcome!
 
 
 ### Changelog
