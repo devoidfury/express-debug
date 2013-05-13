@@ -71,6 +71,8 @@ for proper structure, each panel is an object
 
 `nav` - links to every GET route in your app. (not a default panel)
 
+### Caveats
+* This module will not work if you explicitly define `app.use(app.router);`
 
 ### Future
 * optional error page that prints better stacks
