@@ -71,10 +71,6 @@ for proper structure, each panel is an object
 
 `nav` - links to every GET route in your app. (not a default panel)
 
-### Caveats
-* express-debug adds extra middleware to the express app, so if `app.use(app.router)` is used, express-debug
-must be called before that line in order to patch rendering before a route executes `res.render`, otherwise
-the EDT tab will not show up.
 
 ### Future
 * optional error page that prints better stacks
@@ -84,6 +80,10 @@ the EDT tab will not show up.
 
 
 ### Changelog
+* **1.0.3**
+  * usability fix: middleware order no longer matters, thanks to [connectr](https://github.com/olalonde/connectr)
+  * style tweaks
+
 * **1.0.2**
   * add basic nav panel (not a default panel)
   * style and usability improvements
