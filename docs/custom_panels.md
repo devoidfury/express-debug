@@ -13,7 +13,7 @@ my_panel = {
     }
 }
 ```
-Optionally, panels supports the following optional additional properties:
+Optionally, panels supports the following additional properties:
 
 standalone: set this property to `true` to display this panel on the standalone express-debug mount
 
