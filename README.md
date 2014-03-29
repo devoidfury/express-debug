@@ -73,6 +73,7 @@ for proper structure, each panel is an object
 
 
 ### Future
+* express 4.x branch support
 * optional error page that prints better stacks
 * save more information about non-injected requests
 * improve styling
