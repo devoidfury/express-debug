@@ -65,7 +65,7 @@ for proper structure, each panel is an object
 
 `software_info` - shows current versions of node and libraries installed locally (not globally installed packages!)
 
-`profile` - total req processing time. middleware, param, and route timings.
+`profile` - total req processing time. middleware, param, and route timings. (not a default panel; does not work with express 4.x yet)
 
 `other_requests` - shows details on non-page requests made to the server (not a default panel, use extra_panels setting to invoke. `{extra_panels: ['other_requests']}`)
 
@@ -73,7 +73,8 @@ for proper structure, each panel is an object
 
 
 ### Future
-* express 4.x branch support
+* profile panel: express 4.x compatibility
+* nav panel: express 4.x - check multiple router instances
 * optional error page that prints better stacks
 * save more information about non-injected requests
 * improve styling
@@ -81,6 +82,11 @@ for proper structure, each panel is an object
 
 
 ### Changelog
+* **1.1.0**
+  * basic express 4.x support
+  * profile panel is no longer a default panel
+  * update connectr
+
 * **1.0.3**
   * usability fix: middleware order no longer matters, thanks to [connectr](https://github.com/olalonde/connectr)
   * style tweaks
@@ -140,7 +146,7 @@ for proper structure, each panel is an object
 
 
 ### License - MIT
-Copyright (c) 2013 Tom Hunkapiller and contributors
+Copyright (c) 2014 Tom Hunkapiller and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
