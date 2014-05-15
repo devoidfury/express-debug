@@ -11,7 +11,7 @@ panel is mounted at `/express-debug`. See settings section for more information.
 
 express-debug should **NOT** be used in production environments.
 
-**Compatible with express 3.x and node 0.8+**
+**Compatible with express 3 and 4, node 0.8+**
 
 
 **[Screenshot of the tool in action](http://i.imgur.com/rz3WgSp.png)**
@@ -26,10 +26,7 @@ express-debug should **NOT** be used in production environments.
 var express = require('express');
 var app = express();
 
-app.configure('development', function() {
-    var edt = require('express-debug');
-    edt(app, {/* settings */});
-});
+require('express-debug')(app, {/* settings */});
 
 /* ... application logic ... */
 ```
