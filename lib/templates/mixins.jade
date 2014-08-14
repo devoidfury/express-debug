@@ -26,6 +26,7 @@ mixin print_obj(obj, depth, options)
     - depth = depth || 0;
     - options = options || {};
     - options.depth = options.depth || EDTsettings.depth;
+    - options.sort = (options.sort === undefined) ? EDTsettings.sort : options.sort;
     - if (!obj.EDT_hidden)
         - if (depth < options.depth)
             - var keys = Object.keys(obj);
