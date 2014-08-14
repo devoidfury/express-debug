@@ -1,4 +1,4 @@
-mixin print_val(val, depth)
+mixin print_val(val, depth, options)
     - if (val === undefined)
         span.undefined undefined
     - if (val === null)
@@ -12,21 +12,25 @@ mixin print_val(val, depth)
             - else
                 span.object { }
         - else
-            mixin print_obj(val, depth + 1)
+            mixin print_obj(val, depth + 1, options)
     - else if (typeof val === 'function')
         a.showFn args: #{val.length}, fn name: #{val.name}
         pre.fn !{val}
         - if (Object.keys(val).length)
-            mixin print_obj(val, depth + 1)
+            mixin print_obj(val, depth + 1, options)
     - else
         - _type = typeof val;
         span(class="#{_type}") #{val}
 
-mixin print_obj(obj, depth)
+mixin print_obj(obj, depth, options)
     - depth = depth || 0;
-
+    - options = options || {};
+    - options.depth = options.depth || EDTsettings.depth;
     - if (!obj.EDT_hidden)
-        - if (depth < EDTsettings.depth)
+        - if (depth < options.depth)
+            - var keys = Object.keys(obj);
+            - if (options.sort)
+                - keys = keys.sort();
             table.object
                 thead: tr.collapse
                     - if (obj instanceof Array)
@@ -36,12 +40,12 @@ mixin print_obj(obj, depth)
                     th value
                     th.indicator
                 tbody
-                    - Object.keys(obj).forEach(function(prop){
+                    - keys.forEach(function(prop){
                         - var val = obj[prop]
                         - if (!val || val.EDT_hidden === undefined)
                             tr
                                 td !{prop}
-                                td(colspan=2): mixin print_val(val, depth)
+                                td(colspan=2): mixin print_val(val, depth, options)
                     - })
         - else
-            span.exceeded (Depth exceeded; settings.depth: #{EDTsettings.depth})
+            span.exceeded (Depth exceeded; max depth: #{options.depth})
