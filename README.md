@@ -34,7 +34,7 @@ require('express-debug')(app, {/* settings */});
 
 ### Settings
 
-`depth` - How deep to recurse through printed objects.
+`depth` - How deep to recurse through printed objects.  This is the default unless the print_obj function is passed an options object with a 'depth' property.
 (Default: `4`)
 
 `theme` - Absolute path to a css file to include and override EDT's default css.
@@ -52,6 +52,9 @@ for proper structure, each panel is an object
 
 `extra_attrs` - If you need to add arbitrary attributes to the containing element of EDT, this allows you to. (For example, you may want to use "ng-non-bindable" if you're using angular)
 (Default: `''`)
+
+`sort` - A boolean to determine whether to sort the keys or not.
+(Default: `false`)
 
 ### Panels
 
