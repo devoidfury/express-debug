@@ -51,3 +51,8 @@ my_panel.post_render = function(req) {
     // just after rendering
 }
 ```
+
+The panels are provided two mixins: print_val, and print_obj. See express-debug/lib/templates/mixins.jade
+
+The `options` parameter is optional, and allows you to pass in a custom sort option or depth (the max-depth to print recursively). If omitted, the default global setting will be used.
+The `depth` parameter is the current depth level of the call, so should be initially omitted, or if used with the options parameter, it should be falsey (0, null, undefined, false, '').

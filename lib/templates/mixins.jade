@@ -30,7 +30,9 @@ mixin print_obj(obj, depth, options)
     - if (!obj.EDT_hidden)
         - if (depth < options.depth)
             - var keys = Object.keys(obj);
-            - if (options.sort)
+            - if (typeof options.sort === 'function')
+                - keys = keys.sort(options.sort);
+            - else if (options.sort)
                 - keys = keys.sort();
             table.object
                 thead: tr.collapse

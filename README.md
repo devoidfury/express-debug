@@ -53,7 +53,7 @@ for proper structure, each panel is an object
 `extra_attrs` - If you need to add arbitrary attributes to the containing element of EDT, this allows you to. (For example, you may want to use "ng-non-bindable" if you're using angular)
 (Default: `''`)
 
-`sort` - A boolean to determine whether to sort the keys or not.
+`sort` - Global option to determine sort order of printed object values. `false` for default order, `true` for basic default sort, or a function to use for sort. [See MDN Array sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 (Default: `false`)
 
 ### Panels
