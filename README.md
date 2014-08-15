@@ -85,6 +85,11 @@ for proper structure, each panel is an object
 
 
 ### Changelog
+* **1.1.1**
+  * add `extra_attrs` option to add html attributes to the rendered EDT container
+  * add `sort` option (thanks to vaughan99)
+  * fix an issue that caused the panel to be rendered multiple times in some circumstances
+
 * **1.1.0**
   * basic express 4.x support
   * profile panel is no longer a default panel
