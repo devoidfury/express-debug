@@ -50,6 +50,9 @@ for proper structure, each panel is an object
 `path` - path to render standalone express-debug \[set to `null` or `false` to disable\]
 (Default: `/express-debug`)
 
+`extra_attrs` - If you need to add arbitrary attributes to the containing element of EDT, this allows you to. (For example, you may want to use "ng-non-bindable" if you're using angular)
+(Default: `''`)
+
 ### Panels
 
 `locals` - app.locals, res.locals, and options passed to the template (merged into res.locals)

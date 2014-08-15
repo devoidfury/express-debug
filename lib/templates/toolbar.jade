@@ -1,4 +1,4 @@
-div(class="express-debug" + (standalone ? " standalone" : ""), id="express-debug", data-path=(EDTsettings.path || ''))
+div <div class="express-debug !{standalone ? "standalone" : ""}" id="express-debug" data-path="!{EDTsettings.path || ''}" !{extra_attrs} />
     include ../assets/style.css
     - if (theme)
         style(type='text/css')!=theme
