@@ -11,9 +11,9 @@
   "author": "Tom Hunkapiller",
   "license": "MIT",
   "dependencies": {
+    "connectr": "0.0.7",
     "jade": "0.29.0",
-    "xtend": "2.0.3",
-    "connectr": "0.0.6"
+    "xtend": "2.0.3"
   },
   "keywords": [
     "express",
@@ -21,8 +21,5 @@
     "tool",
     "development",
     "toolbar"
-  ],
-  "peerDependencies": {
-    "express": ">= 3.0.0 < 5"
-  }
+  ]
 }
